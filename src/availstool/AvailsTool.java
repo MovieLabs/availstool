@@ -9,24 +9,23 @@ import org.apache.logging.log4j.*;
  */
 public class AvailsTool {
     private enum Opts {
-        s, f, o, sstoxml, xmltoss, dumpss, strict;
+        s, f, o, sstoxml, xmltoss, dumpss, clean, wx;
     }
 
-    static Logger log;
-
     public static void usage() {
-        System.out.println("AvailTool [-sstoxml | -xmltoss | -dumpss] -s sheet -f filename [-o outputfile]");
+        System.out.println(
+            "AvailTool [-clean] [-wx] [-sstoxml | -xmltoss | -dumpss] -s sheet -f filename [-o outputfile]");
     }
 
     public static void main(String[] args) throws Exception {
         String filename;
-        String outfile;
+        String outFile;
 
         // System.out.println(MONGO.Description + " | " + MONGO.Description.ordinal() + " | " +
         //                    MONGO.Description.name());
         // System.exit(0);
         
-        log = LogManager.getLogger(AvailsTool.class.getName());
+        Logger log = LogManager.getLogger(AvailsTool.class.getName());
         log.info("Initializing logger");
 
         Options options = new Options();
@@ -36,7 +35,8 @@ public class AvailsTool {
         options.addOption(Opts.sstoxml.name(), false, "convert avails spreadsheet to XML");
         options.addOption(Opts.xmltoss.name(), false, "convert avails XML to a spreadsheet");
         options.addOption(Opts.dumpss.name(), false, "dump a spreadsheet file");
-        options.addOption(Opts.strict.name(), false, "strict processing of entries");
+        options.addOption(Opts.wx.name(), true, "treat warning as fatal error");
+        options.addOption(Opts.clean.name(), false, "clean up data entries");
 	 
         CommandLineParser cli = new DefaultParser();
 	 
@@ -47,18 +47,23 @@ public class AvailsTool {
             boolean optDump = cmd.hasOption(Opts.dumpss.name());
             filename = cmd.getOptionValue(Opts.f.name());
             if (filename == null)
-                throw new ParseException("file not specified");
+                throw new ParseException("input file not specified");
+
+            outFile = cmd.getOptionValue(Opts.o.name());
+            if (outFile == null)
+                throw new ParseException("output file not specified");
             
             if (!(optToXML | optToSS | optDump))
                 throw new ParseException("missing operation");
             if (optToXML) {
                 if (optToSS | optDump)
                     throw new ParseException("more than one operation specified");
-                boolean strict = cmd.hasOption(Opts.strict.name());
+                boolean clean = cmd.hasOption(Opts.clean.name());
+                boolean wx = cmd.hasOption(Opts.wx.name());
                 String sheetName = cmd.getOptionValue(Opts.s.name());
-                SS ss = new SS(filename, sheetName);
+                SS ss = new SS(filename, sheetName, log);
                 ss.dump();
-                ss.toXML(strict);
+                ss.toXML(clean, wx, outFile);
             } else if (optToSS) {
                 if (optToXML | optDump)
                     throw new ParseException("more than one operation specified");
