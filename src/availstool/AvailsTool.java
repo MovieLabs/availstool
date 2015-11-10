@@ -18,7 +18,7 @@ public class AvailsTool {
     }
 
     public static void main(String[] args) throws Exception {
-        String filename;
+        String fileName;
         String outFile;
 
         // System.out.println(MONGO.Description + " | " + MONGO.Description.ordinal() + " | " +
@@ -35,7 +35,7 @@ public class AvailsTool {
         options.addOption(Opts.sstoxml.name(), false, "convert avails spreadsheet to XML");
         options.addOption(Opts.xmltoss.name(), false, "convert avails XML to a spreadsheet");
         options.addOption(Opts.dumpss.name(), false, "dump a spreadsheet file");
-        options.addOption(Opts.wx.name(), true, "treat warning as fatal error");
+        options.addOption(Opts.wx.name(), false, "treat warning as fatal error");
         options.addOption(Opts.clean.name(), false, "clean up data entries");
 	 
         CommandLineParser cli = new DefaultParser();
@@ -45,8 +45,8 @@ public class AvailsTool {
             boolean optToXML = cmd.hasOption(Opts.sstoxml.name());
             boolean optToSS = cmd.hasOption(Opts.xmltoss.name());
             boolean optDump = cmd.hasOption(Opts.dumpss.name());
-            filename = cmd.getOptionValue(Opts.f.name());
-            if (filename == null)
+            fileName = cmd.getOptionValue(Opts.f.name());
+            if (fileName == null)
                 throw new ParseException("input file not specified");
 
             outFile = cmd.getOptionValue(Opts.o.name());
@@ -61,8 +61,10 @@ public class AvailsTool {
                 boolean clean = cmd.hasOption(Opts.clean.name());
                 boolean wx = cmd.hasOption(Opts.wx.name());
                 String sheetName = cmd.getOptionValue(Opts.s.name());
-                SS ss = new SS(filename, sheetName, log);
+                SS ss = new SS(fileName, sheetName, log);
+                log.info("processing file: " + fileName + " sheet: " + sheetName);
                 ss.dump();
+                log.info("Options: -clean:" + clean + " -wx:" + wx + " output file: " + outFile);
                 ss.toXML(clean, wx, outFile);
             } else if (optToSS) {
                 if (optToXML | optDump)
@@ -70,7 +72,7 @@ public class AvailsTool {
             } else { // dumpSS
                 if (optToXML | optToSS)
                     throw new ParseException("more than one operation specified");
-                SS.dump(filename);
+                SS.dump(fileName);
             }
         }
         catch( ParseException exp ) {
