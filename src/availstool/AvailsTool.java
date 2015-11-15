@@ -71,7 +71,10 @@ public class AvailsTool {
                 log.info("Options: -clean:" + clean + " -wx:" + wx + " output file: " + outFile);
                 String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new java.util.Date());
                 String shortDesc = String.format("generated XML from %s:%s on %s", fileName, sheetName, timeStamp);
-                ss.toXML(clean, wx, outFile, shortDesc);
+                AvailSS ss2 = new AvailSS(fileName, log, wx, clean);
+                AvailsSheet as = ss2.addSheet(sheetName);
+                as.makeXMLFile(outFile, shortDesc);
+                // ss.toXML(clean, wx, outFile, shortDesc);
             } else if (optToSS) {
                 if (optToXML | optDump)
                     throw new ParseException("more than one operation specified");
