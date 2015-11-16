@@ -65,23 +65,21 @@ public class AvailsTool {
                 boolean clean = cmd.hasOption(Opts.clean.name());
                 boolean wx = cmd.hasOption(Opts.wx.name());
                 String sheetName = cmd.getOptionValue(Opts.s.name());
-                SS ss = new SS(fileName, sheetName, log);
+                AvailSS ss = new AvailSS(fileName, log, wx, clean);
+                AvailsSheet as = ss.addSheet(sheetName);
                 log.info("processing file: " + fileName + " sheet: " + sheetName);
-                ss.dump();
+                ss.dump(sheetName);
                 log.info("Options: -clean:" + clean + " -wx:" + wx + " output file: " + outFile);
                 String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new java.util.Date());
                 String shortDesc = String.format("generated XML from %s:%s on %s", fileName, sheetName, timeStamp);
-                AvailSS ss2 = new AvailSS(fileName, log, wx, clean);
-                AvailsSheet as = ss2.addSheet(sheetName);
                 as.makeXMLFile(outFile, shortDesc);
-                // ss.toXML(clean, wx, outFile, shortDesc);
             } else if (optToSS) {
                 if (optToXML | optDump)
                     throw new ParseException("more than one operation specified");
             } else { // dumpSS
                 if (optToXML | optToSS)
                     throw new ParseException("more than one operation specified");
-                SS.dump(fileName);
+                AvailSS.dumpFile(fileName);
             }
         }
         catch( ParseException exp ) {
