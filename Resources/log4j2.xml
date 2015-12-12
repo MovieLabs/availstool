@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration status="DEBUG">
+<Configuration status="INFO">
   <Properties>
-    <Property name="log-path">/Users/pgj/code/java/logs</Property>
+    <Property name="log-path"><!--/Users/pgj/code/java-->./logs</Property>
   </Properties>
   <Appenders>
-    <RollingFile name="RollingFile" fileName="${log-path}/myexample.log"
-                 filePattern="${log-path}/myexample-%d{yyyy-MM-dd}-%i.log" >
+    <RollingFile name="RollingFile" fileName="${log-path}/availstool.log"
+                 filePattern="${log-path}/availstool-%d{yyyy-MM-dd}-%i.log" >
       <PatternLayout>
-        <pattern>%d{dd/MMM/yyyy HH:mm:ss,SSS}- %c{1}: %m%n</pattern>
+        <!--pattern>%d{dd-MMM-yyyy HH:mm:ss,SSS}- %c{1}: %m%n</pattern -->
+        <pattern>%d{dd-MMM-yyyy HH:mm:ss}: %m%n</pattern>
       </PatternLayout>
       <Policies>
-        <SizeBasedTriggeringPolicy size="1 KB" />
+        <!-- SizeBasedTriggeringPolicy size="100 KB" / -->
+        <OnStartupTriggeringPolicy/>
       </Policies>
       <DefaultRolloverStrategy max="4"/>
     </RollingFile>
