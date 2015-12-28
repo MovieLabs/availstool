@@ -102,7 +102,7 @@ public class AvailsTool {
                 log.info(message);
                 if (verbose)
                     System.out.println(message);
-                log.info("Options: -clean:" + clean + " -wx:" + wx + " output file: " + outFile);
+                log.info("Options: -clean:" + clean + "; -wx:" + wx + "; output file: " + outFile);
                 String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new java.util.Date());
                 String shortDesc = String.format("generated XML from %s:%s on %s", fileName, sheetName, timeStamp);
                 as.makeXMLFile(outFile, shortDesc);
