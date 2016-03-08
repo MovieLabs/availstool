@@ -23,7 +23,7 @@
  * Author: Paul Jensen <pgj@movielabs.com>
  */
 
-package availstool;
+package com.movielabs.availstool;
 
 import java.text.SimpleDateFormat;
 import java.util.regex.Matcher;
