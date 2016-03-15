@@ -31,7 +31,7 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.cli.*;
 
-import com.movielabs.avails.*;
+import com.movielabs.availslib.*;
 
 import org.apache.logging.log4j.*;
 
