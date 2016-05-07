@@ -23,6 +23,9 @@
  * Author: Paul Jensen <pgj@movielabs.com>
  */
 
+// -v -f test06.xlsx -sstoxml -s Movies -clean -o testout7g.xml
+// -v -o qqq.xlsx -xmltoss -f testout7g.xml
+
 package com.movielabs.availstool;
 
 import java.text.SimpleDateFormat;
@@ -31,7 +34,7 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.cli.*;
 
-import com.movielabs.avails.*;
+import com.movielabs.availslib.*;
 
 import org.apache.logging.log4j.*;
 
@@ -132,10 +135,14 @@ public class AvailsTool {
                 String shortDesc = String.format("generated XML from %s:%s on %s", fileName, sheetName, timeStamp);
                 as.makeXMLFile(outFile, shortDesc);
             } else if (optToSS) {
-             if (optToXML | optDumpSS | optDumpSheet)
+                if (optToXML | optDumpSS | optDumpSheet)
                     throw new ParseException("more than one operation specified");
                 // TODO implement this
-                throw new UnsupportedOperationException("Not implemented");
+             	outFile = cmd.getOptionValue(Opts.o.name());
+             	if (outFile == null)
+                    throw new ParseException("output file not specified");
+                AvailXML x = new AvailXML(fileName, log);
+                x.makeSS(outFile);
             } else if (optDumpSS) {
                 if (optToXML | optToSS | optDumpSheet)
                     throw new ParseException("more than one operation specified");
