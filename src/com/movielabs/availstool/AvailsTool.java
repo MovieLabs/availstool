@@ -23,8 +23,10 @@
  * Author: Paul Jensen <pgj@movielabs.com>
  */
 
-// -v -f test06.xlsx -sstoxml -s Movies -clean -o testout7g.xml
-// -v -o qqq.xlsx -xmltoss -f testout7g.xml
+// -v -f test06.xlsx -sstoxml -s Movies -clean -o testout8-mov.xml
+// -v -f testout8-mov.xml -xmltoss -o testout8-mov.xlsx
+// -v -f test06.xlsx -sstoxml -s TV -clean -o testout8-tv.xml
+// -v -f testout8-tv.xml -xmltoss -o testout8-tv.xlsx
 
 package com.movielabs.availstool;
 
