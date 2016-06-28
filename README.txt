@@ -22,7 +22,7 @@ README - availstool
    source files you will need the following libraries:
    
    - JRE System Library (JavaSE-1.8 recommended)
-   - The availslib library
+   - The availslib library (this is a separate github project)
    - Apache Commons CLI (https://commons.apache.org/proper/commons-cli/);
      used the following jar:
        * commons-cli-1.3.1.jar
