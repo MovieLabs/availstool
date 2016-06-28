@@ -55,13 +55,13 @@ public class AvailsTool {
         " -clean      clean up minor validation errors (e.g. trailing whitespace)\n" +
         " -wx         exit immediately if any validation errors are encountered\n" +
         " -sstoxml    convert named file:sheet to XML\n" +
-        " -xmltoss    try to convert named XML file to a spreadsheet (NOT IMPLEMENTED)\n" +
+        " -xmltoss    try to convert named XML file to a spreadsheet\n" +
         " -dumpss     dump the named spreadsheet file (.xlsx) to the console\n" +
         " -dumpsheet  dump the names file:sheet to the console\n" +
-        " -f          the input file (required)\n" +
-        " -o          the output file (required for -sstoxml)\n" +
-        " -s          the named sheet within the .xlsx file (required for -sstoxml & -dumpsheet)\n" +
-        "             (if an integer, treat as a 0-based index into the sheets)";
+        " -f          the input file (required for -sstoxml & -xmltoss)\n" +
+        " -o          the output file (required for -sstoxml & -xmltoss)\n" +
+        " -s          the named sheet within the .xlsx file (required for -sstoxml,\n" +
+        "             -xmltoss, & -dumpsheet).  If an integer, treat as a 0-based index into the sheets.";
 
     public static void usage() {
         System.out.println(msg);

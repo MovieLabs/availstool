@@ -40,19 +40,19 @@ README - availstool
 3) Documentation: running "availstool -help" yields the following
 
    java -jar availstool.jar [-v] [-clean] [-wx] [-sstoxml | -xmltoss | -dumpss | -dumpsheet]
-                            [-s sheet] -f filename -o outputfile\n +
-   where:\n +
-   -v          verbose\n +
-   -clean      clean up minor validation errors (e.g. trailing whitespace)\n +
-   -wx         exit immediately if any validation errors are encountered\n +
-   -sstoxml    convert named file:sheet to XML\n +
-   -xmltoss    try to convert named XML file to a spreadsheet (NOT IMPLEMENTED)\n +
-   -dumpss     dump the named spreadsheet file (.xlsx) to the console\n +
-   -dumpsheet  dump the names file:sheet to the console\n +
-   -f          the input file (required)\n +
-   -o          the output file (required for -sstoxml)\n +
-   -s          the named sheet within the .xlsx file (required for -sstoxml & -dumpsheet)\n +
-               (if an integer, treat as a 0-based index into the sheets);
+                            [-s sheet] -f filename -o outputfile
+   where:
+   -v          verbose
+   -clean      clean up minor validation errors (e.g. trailing whitespace)
+   -wx         exit immediately if any validation errors are encountered
+   -sstoxml    convert named file:sheet to XML
+   -xmltoss    try to convert named XML file to a spreadsheet
+   -dumpss     dump the named spreadsheet file (.xlsx) to the console
+   -dumpsheet  dump the names file:sheet to the console
+   -f          the input file (required for -sstoxml & -xmltoss)
+   -o          the output file (required for -sstoxml & -xmltoss)
+   -s          the named sheet within the .xlsx file (required for -sstoxml,
+               -xmltoss, & -dumpsheet).  If an integer, treat as a 0-based index into the sheets.
 
 4) Test and verification: for a simple test perform the following:
         * build availstool
