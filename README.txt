@@ -1,6 +1,10 @@
 README - availstool
 -------------------
 
+THIS REPOSITORY IS DEPRECATED and has been superceeded by 
+the MDDF repository https://github.com/MovieLabs/mddf
+=======================================================
+
 0) Introduction: "availstool" is a simple Java command-line utility to
    excercise some of the functionality of the "availslib" utility.
    The latter is a separate github project (see below) that contains
